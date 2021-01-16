@@ -1,43 +1,106 @@
-# Template de Projetos Java sem Maven/Gradle configurados para o Visual Studio Code
+# Avaliação 01 Procedimentos e Testagem
 
-Um _template_ é um projeto modelo para não iniciar do zero e ter pelo menos uma estrutura básica onde se apoiar.
+Link do Classroom <https://classroom.github.com/a/i-0YwXXM>
 
-Antes de começar a desenvolver com este _template_ é necessário ter instalado o Java Software Development Kit (JDK) 8+, o editor Visual Studio Code (VSCode)e o utilitário de controle de versão de código _Git_.
+## Implementar usando métodos e testar segundo as especificações
 
-## Instalação e Configuração do JDK
+Esta atividade é avaliada. Esforço estimado entre 4 e 8h.
 
-É necessário instalar o JDK a partir da versão 8, porém é recomendada versão 11-LTS (Long Term Support - suporte de longo prazo).
+Copie os casos de teste para o método `main` em [App.java](src/App.java), conforme o exemplo que já está no arquivo. Comente com `//` ou `/*` e `*/` as linhas que ainda não foram implementadas.
 
-No Windows, ele pode ser obtido aqui <https://adoptopenjdk.net/>. Siga as instruções de instalação e não esqueça de selecionar os opcionais, especialmente o _add Java to PATH_.
+**Restrição: não podem ser usadas as bibliotecas do Java, por exemplo, a classe `Math`, `Scanner`, etc, inclusive os métodos de Integer, como `parseInt` ou métodos de String, EXCETO `length`, `charAt` e `equals`; Os Casos de Teste podem ser corrigidos, mas a especificação não pode ser alterada.**
 
-No Linux, execute no terminal o comando `sudo apt install openjdk-11-jdk` (válido para Debian, Ubuntu, Pop e Mint, por exemplo). <small>Se quiser rodar a última versão, substitua `11` por `14`.</small>
+### Exponenciação
 
-Para testar a instalação, Windows ou Linux, abra o _Prompt_ de comando ou o terminal e execute o compilador Java com `javac -version`. A saída deve ser algo com `javac 11.0.9.1` ou outra sub-versão do 11.
+Implementar a classe `Matematica` e um procedimento para fazer potência de inteiros `potencia`.
 
-## Instalação e Configuração do VSCode
+**Casos de Teste:**
 
-O Visual Studio Code pode ser obtido aqui <https://code.visualstudio.com/download>. A instalação é semelhante no Windows e Linux.
+```java
+// método Matematica.potencia que entram dois inteiros e sai um inteiro
+// potencia(int,int):int
+int base = 3;
+int expoente = 4;
+int result = Matematica.potencia(base, expoente);
+System.out.println(result); // imprime 81
+System.out.println(result == 81); // imprime true
 
-No Windows, abra o instalador e não esqueça de selecionar todos os opcionais, como _adicionar code ao path_, _adicionar "abrir com code" ao menu_, etc.
+// Casos de Teste:
+System.out.print("potencia(3, 2) == 9 "); // 3 ao quadrado
+System.out.println(Matematica.potencia(3, 2) == 9); // 3 ao quadrado
+System.out.print("potencia(2, 3) == 8 "); // 2 ao cubo
+System.out.println(Matematica.potencia(2, 3) == 8); // 2 ao cubo
+// Números grandes
+System.out.print("potencia(23, 6) == 148035889 ");
+System.out.println(Matematica.potencia(23, 6) == 148035889);
+System.out.print("potencia(2, 30) == 1073741824 ");
+System.out.println(Matematica.potencia(2, 30) == 1073741824);
+// Casos Especiais: bases negativas
+System.out.print("potencia(-2, 3) == -8 ");
+System.out.println(Matematica.potencia(-2, 3) == -8);
+System.out.print("potencia(-2, 4) == 16 ");
+System.out.println(Matematica.potencia(2, 4) == 16);
+// Casos não cobertos: expoente negativo
+System.out.print("potencia(2, -3) == 0 ");
+System.out.println(Matematica.potencia(2, -3) == 0);
+System.out.print("potencia(7, -2) == 0 ");
+System.out.println(Matematica.potencia(7, -2) == 0);
+// Adicione mais 2 Casos de Teste
+```
 
-No Linux, abra o arquivo `.deb` baixado no gerenciador de pacotes e instale normalmente conforme instruções de seu sistema operacional.
+### Girar String
 
-Este _template_ possui uma pasta [.vscode](.vscode) com as extensões necessárias em [extensions.json](.vscode/extensions.json) e as configurações recomendadas em [settings.json](.vscode/settings.json). **Fique a vontade para alterá-los como achar melhor.**
+Dada uma `String` de entrada girá-la no sentido horário. Implemente a classe `Texto` e o procedimento `girar`.
 
-A única extensão obrigatória é a _"vscjava.vscode-java-pack"_.
+**Casos de Teste:**
 
-A extensão _"EditorConfig"_ é bastante recomendada. Ela funciona junto com o arquivo [.editorconfig](.editorconfig) presente neste _template_ para padronizar a formatação dos códigos-fonte.
+```java
+String s1 = "worf";
+String s2 = Texto.girar(s1);
+System.out.println(s1); // worf // string original
+System.out.println(s2); // fwor // string girada
+System.out.println(s2.equals("fwor") == true); // true
+String s3 = Texto.girar(s2);
+System.out.println(s3); // rfwo
+System.out.println(s3.equals("rfwo") == true); // true
+System.out.println(Texto.girar("kira").equals("akir") == true);
+System.out.println(Texto.girar(Texto.girar(s3)).equals("worf") == true);
+// Casos Especiais
+System.out.println(Texto.girar("").equals("") == true);
+System.out.println(Texto.girar("a").equals("a") == true);
+System.out.println(Texto.girar("aa").equals("aa") == true);
+// Adicione mais 2 Casos de Teste
+```
 
-Finalmente, se preferes o editor em Português, instale a seguinte extensão: _Portuguese (Brazil) Language Pack for Visual Studio Code_.
+### Desbastar String
 
-## Instalação e Configuração do Git
+Implementar o procedimento `aparar` na classe `Texto`, que toma uma `String` de entrada e devolve outra sem o último caractere.
 
-O Git pode ser obtido para Windows neste link <https://git-scm.com/download/win>. A instalação é simples, como sempre não esqueça dos opcionais, principalmente a opção _adicionar o git ao path_.
+**Casos de Teste:**
 
-Para Debian, Ubuntu e derivados o comando `sudo apt install git` faz tudo.
+```java
+String s4 = "seven of nine";
+String s5 = Texto.aparar(s4);
+System.out.println(s4); // seven of nine
+System.out.println(s5); // seven of nin
+System.out.println(s5.equals("seven of nin") == true); // true
+String s6 = Texto.aparar(s5);
+System.out.println(s6); // seven of ni
+System.out.println(s6.equals("seven of ni") == true); // true
+System.out.println(Texto.aparar("spock").equals("spoc") == true);
+// Casos Especiais
+System.out.println(Texto.aparar("Q").equals("") == true);
+System.out.println(Texto.aparar("").equals("") == true);
+System.out.println(Texto.aparar(Texto.aparar(Texto.aparar("abc"))).equals("") == true);
+// Adicione mais 2 Casos de Teste:
+```
 
-Para verificar a instalação abra o _prompt_ ou um terminal e execute `git --version`. Se não acusou _comando não encontrado_ é porque está tudo funcionando perfeitamente.
+### Valor absoluto de um número
 
-## Executando
+Especificar, implementar e testar um método que resolva o valor absoluto de um número `|n|`. Isto é, tens de especificar as regras válidas para entrada e saída bem como definir os casos de teste.
 
-Com tudo isto pronto deve ser possível abrir o arquivo [App.java](src/App.java) e clicar em `run` para executar o projeto. Se quiser fazê-lo manualmente, abra um terminal no Linux ou _prompt_ de comando no Windows, e na pasta raiz do projeto execute `javac -d bin src/App.java; java -cp bin App`, ou separados sendo primeiro `javac -d bin src/App.java` para compilar e depois `java -cp bin App` para executar.
+Referência: <https://pt.wikipedia.org/wiki/Valor_absoluto>
+
+* * *
+
+Deu certo [:)](memes/yes.jpg) Deu errado [:(](memes/no.jpg)
